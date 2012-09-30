@@ -1,17 +1,20 @@
 steps to reproduce
 
-* Boot redis on default port
-* Boot rails app with puma
+Boot redis on default port
+
+Boot rails app with puma
 
 ```
 puma
 ```
 
-* Startup rails console
+Startup rails console
 
-* `curl -i localhost:9292/works` and see it works
-* `curl -i localhost:9292/broken`
-* in rails console:
+`curl -i localhost:9292/works` and see it works
+
+`curl -i localhost:9292/broken`
+
+in rails console:
 
 ```rb
 require "channel"
@@ -19,7 +22,7 @@ bbc = Channel.new(:bbc)
 bbc.instance_eval{changed and notify_observers}
 ```
 
-* see that curl to broken sends no messages
+see that curl to broken sends no messages
 
 Channel implementation
 
