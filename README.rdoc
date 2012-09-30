@@ -2,22 +2,27 @@ steps to reproduce
 
 1. Boot redis on default port
 2. Boot rails app with puma
+
 ```sh
 puma
 ```
+
 3. Startup rails console
 
 4. `curl -i localhost:9292/works` and see it works
 5. `curl -i localhost:9292/broken`
 6. in rails console:
+
 ```rb
 require "channel"
 bbc = Channel.new(:bbc)
 bbc.instance_eval{changed and notify_observers}
 ```
+
 7. see that curl to broken sends no messages
 
 Channel implementation
+
 ```rb
 require 'tusk/observable/redis'
 require 'redis'
@@ -48,6 +53,7 @@ end
 ```
 
 And in the controller:
+
 ```rb
   # just a simple stream helper
   def with_stream(&block)
