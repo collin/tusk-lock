@@ -16,7 +16,7 @@ Startup rails console
 
 in rails console:
 
-```rb
+```ruby
 require "channel"
 bbc = Channel.new(:bbc)
 bbc.instance_eval{changed and notify_observers}
@@ -26,7 +26,7 @@ see that curl to broken sends no messages
 
 Channel implementation
 
-```rb
+```ruby
 require 'tusk/observable/redis'
 require 'redis'
 
@@ -57,7 +57,7 @@ end
 
 And in the controller:
 
-```rb
+```ruby
   # just a simple stream helper
   def with_stream(&block)
     begin 
