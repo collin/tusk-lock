@@ -85,14 +85,18 @@ And in the controller:
       channel = Channel.new(:bbc)
       listener = Object.new
       def listener.update
+        stream.write "channel message!\n"
         # This never happens.
         # looking into things it looks like
         # this is executed from a thread spawned
         # by Tusk. Digging into that it looks
         # like any access to the response (response.stream)
         # object of the controller hangs.
+        #
+        # I was able to verify through print statements that Tusk
+        # is doing it's thing up until the point we try to call stream.write
+        #
         # Deadlocked?
-        stream.write "channel message!\n"
       end
       channel.add_observer listener
       sleep
